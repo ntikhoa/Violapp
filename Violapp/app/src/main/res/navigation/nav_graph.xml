@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/metronomeFragment">
+
+    <fragment
+        android:id="@+id/metronomeFragment"
+        android:name="com.ntikhoa.violapp.MetronomeFragment"
+        android:label="fragment_metronome"
+        tools:layout="@layout/fragment_metronome" />
+</navigation>

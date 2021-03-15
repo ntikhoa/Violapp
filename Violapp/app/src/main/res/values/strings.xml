@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Violapp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tempo">TEMPO</string>
+    <string name="default_tempo_60">60</string>
+    <string name="increase_tempo">increase tempo</string>
+    <string name="decrease_tempo">decrease tempo</string>
+    <string name="quarter_note">quarter note</string>
+    <string name="equal">=</string>
+    <string name="bpm">BPM</string>
+    <string name="default_tempo_term">Adagio</string>
+</resources>
