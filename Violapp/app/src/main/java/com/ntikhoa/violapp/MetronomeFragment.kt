@@ -11,13 +11,13 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome) {
     private var _binding: FragmentMetronomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var controller: MetronomeControllerFragment;
+    private lateinit var controller: MetronomeControllerFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMetronomeBinding.bind(view)
 
-        addControllerFragment();
+        addControllerFragment()
 
     }
 

@@ -19,7 +19,7 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
 
     private val tempo get() = Integer.parseInt(binding.viewTempo.textViewTempo.text.toString())
 
-    private val TEMPO_TERMS get() = TempoTerm.TEMPO_TERMS
+    private val tempoTerms get() = TempoTerm.TEMPO_TERMS
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +29,7 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
         setOnClickTempoTerm()
     }
 
-    fun setOnClickIncrDecrBtn() {
+    private fun setOnClickIncrDecrBtn() {
         binding.apply {
             btnIncr.setOnClickListener(onBtnIncrDecrClickListener)
             btnDecr.setOnClickListener(onBtnIncrDecrClickListener)
@@ -41,11 +41,11 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
             when (it.id) {
                 btnIncr.id -> {
                     if (tempo < MAX_TEMPO)
-                        viewTempo.textViewTempo.setText((tempo + 1).toString())
+                        viewTempo.textViewTempo.text = (tempo + 1).toString()
                 }
                 btnDecr.id -> {
                     if (tempo > MIN_TEMPO)
-                        viewTempo.textViewTempo.setText((tempo - 1).toString())
+                        viewTempo.textViewTempo.text = (tempo - 1).toString()
                 }
             }
 
@@ -53,7 +53,7 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
         }
     }
 
-    fun setOnClickTempoTerm() {
+    private fun setOnClickTempoTerm() {
         binding.textViewTempoTerm.setOnClickListener {
             val ft = parentFragmentManager.beginTransaction()
             val chooseTempoTermFragment = ChooseTempoTermFragment()
@@ -66,19 +66,19 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
     }
 
     private fun setTempoTerm() {
-        for (index in TEMPO_TERMS.indices) {
-            if (tempo >= TEMPO_TERMS[index].minTempo
-                && tempo >= TEMPO_TERMS[index].maxTempo
+        for (index in tempoTerms.indices) {
+            if (tempo >= tempoTerms[index].minTempo
+                && tempo >= tempoTerms[index].maxTempo
             ) {
-                binding.textViewTempoTerm.setText(TEMPO_TERMS[index].term)
+                binding.textViewTempoTerm.text = tempoTerms[index].term
             }
         }
     }
 
     override fun onClick(tempoTerm: TempoTerm) {
         binding.apply {
-            textViewTempoTerm.setText(tempoTerm.term)
-            viewTempo.textViewTempo.setText(tempoTerm.getAVGtempo().toString())
+            textViewTempoTerm.text = tempoTerm.term
+            viewTempo.textViewTempo.text = tempoTerm.getAVGtempo().toString()
             parentFragmentManager.popBackStack()
         }
     }
