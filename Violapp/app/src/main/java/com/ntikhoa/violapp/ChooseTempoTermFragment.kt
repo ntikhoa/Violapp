@@ -9,6 +9,29 @@ import com.ntikhoa.violapp.databinding.FragmentChooseTempoTermBinding
 class ChooseTempoTermFragment : Fragment(R.layout.fragment_choose_tempo_term),
     TempoTermAdapter.OnItemClickListener {
 
+    private var currentTempo = DEFAULT_TEMPO
+
+    companion object {
+        private const val DEFAULT_TEMPO = 60
+        const val CURRENT_TEMPO = "current tempo"
+
+        @JvmStatic
+        fun newInstance(currentTempo: Int) =
+            ChooseTempoTermFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(CURRENT_TEMPO, currentTempo)
+                }
+            }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let {
+            currentTempo = it.getInt(CURRENT_TEMPO, DEFAULT_TEMPO)
+        }
+    }
+
     private var _binding: FragmentChooseTempoTermBinding? = null
     private val binding get() = _binding!!
 
@@ -18,7 +41,7 @@ class ChooseTempoTermFragment : Fragment(R.layout.fragment_choose_tempo_term),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentChooseTempoTermBinding.bind(view)
 
-        val adapter = TempoTermAdapter()
+        val adapter = TempoTermAdapter(requireContext(), currentTempo)
         binding.recyclerView.adapter = adapter
         adapter.onItemClickListener = this
     }

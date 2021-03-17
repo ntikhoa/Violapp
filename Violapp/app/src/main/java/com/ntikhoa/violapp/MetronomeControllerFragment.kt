@@ -57,7 +57,7 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
     private fun setOnClickTempoTerm() {
         binding.textViewTempoTerm.setOnClickListener {
 
-            val chooseTempoTermFragment = ChooseTempoTermFragment()
+            val chooseTempoTermFragment = ChooseTempoTermFragment.newInstance(tempo)
             parentFragmentManager.commit {
                 //set animation before replace or add fragment
                 setCustomAnimations(0, 0, 0, R.anim.scrold_up)

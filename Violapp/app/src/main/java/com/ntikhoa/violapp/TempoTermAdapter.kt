@@ -1,11 +1,14 @@
 package com.ntikhoa.violapp
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ntikhoa.violapp.databinding.TempoTermItemBinding
 
-class TempoTermAdapter : RecyclerView.Adapter<TempoTermAdapter.TempoTermViewHolder>() {
+class TempoTermAdapter(val context: Context, val currentTempo: Int) :
+    RecyclerView.Adapter<TempoTermAdapter.TempoTermViewHolder>() {
 
     private val TEMPO_TERMS = TempoTerm.TEMPO_TERMS
 
@@ -42,6 +45,12 @@ class TempoTermAdapter : RecyclerView.Adapter<TempoTermAdapter.TempoTermViewHold
                 textViewTempoTerm.setText(tempoTerm.term)
                 val tempoRangeStr = "${tempoTerm.minTempo} - ${tempoTerm.maxTempo}"
                 textViewTempoRange.setText(tempoRangeStr)
+
+                if (currentTempo >= tempoTerm.minTempo
+                    && currentTempo <= tempoTerm.maxTempo) {
+                    textViewTempoTerm.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                    textViewTempoRange.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                }
             }
         }
     }
