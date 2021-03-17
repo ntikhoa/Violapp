@@ -3,6 +3,7 @@ package com.ntikhoa.violapp
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.ntikhoa.violapp.databinding.FragmentMetronomeControllerBinding
 
 
@@ -55,11 +56,14 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
 
     private fun setOnClickTempoTerm() {
         binding.textViewTempoTerm.setOnClickListener {
-            val ft = parentFragmentManager.beginTransaction()
+
             val chooseTempoTermFragment = ChooseTempoTermFragment()
-            ft.add(R.id.fragment_tempo_term, chooseTempoTermFragment)
-            ft.addToBackStack(null)
-            ft.commit()
+            parentFragmentManager.commit {
+                //set animation before replace or add fragment
+                setCustomAnimations(0, 0, 0, R.anim.scrold_up)
+                replace(R.id.fragment_tempo_term, chooseTempoTermFragment)
+                addToBackStack(null)
+            }
 
             chooseTempoTermFragment.onItemClickListener = this
         }
