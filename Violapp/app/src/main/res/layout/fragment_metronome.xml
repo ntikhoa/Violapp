@@ -51,10 +51,11 @@
             android:background="@color/orange" />
 
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_tick"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="50"
-            android:background="@color/black" />
+            tools:background="@color/black" />
 
         <FrameLayout
             android:layout_width="match_parent"
