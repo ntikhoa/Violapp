@@ -12,9 +12,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     private var _binding: FragmentMetronomeBinding? = null
     private val binding get() = _binding!!
 
-
     private lateinit var controller: MetronomeControllerFragment
-    private lateinit var tickFragment: TickFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,7 +32,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
 
     private fun addTickFragment() {
         val ft = childFragmentManager.beginTransaction()
-        tickFragment = TickFragment(R.layout.fragment_2_tick)
+        val tickFragment = TickFragment(R.layout.fragment_2_tick)
         ft.replace(R.id.fragment_container_tick, tickFragment)
         ft.commit()
     }
@@ -45,10 +43,13 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         _binding = null
     }
 
-    override fun onClick(layoutResId: Int) {
-        val ft = childFragmentManager.beginTransaction()
-        tickFragment = TickFragment(layoutResId)
-        ft.replace(R.id.fragment_container_tick, tickFragment)
-        ft.commit()
+    override fun onClick(timeSignature: Int) {
+        val tickFragment = TickFragmentFactory().createTickFragment(timeSignature)
+        if (tickFragment != null) {
+            val ft = childFragmentManager.beginTransaction()
+            ft.setCustomAnimations(R.anim.slide_in_to_left, R.anim.slide_out_to_left, 0, 0)
+            ft.replace(R.id.fragment_container_tick, tickFragment)
+            ft.commit()
+        }
     }
 }

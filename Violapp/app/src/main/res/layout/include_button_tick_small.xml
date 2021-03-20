@@ -5,6 +5,7 @@
 
     <androidx.appcompat.widget.AppCompatToggleButton
         android:id="@+id/btn_tick"
+        android:alpha="0.7"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/toggle_button_tick"

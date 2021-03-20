@@ -84,9 +84,11 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
 
     private fun setOnClickTimeSignature() {
         binding.textViewTimeSignature.setOnClickListener {
-            if (onTimeSignatureClick != null)
+            if (onTimeSignatureClick != null) {
                 //continue here
-                onTimeSignatureClick?.onClick(R.layout.fragment_3_tick)
+                val timeSignature = 9
+                onTimeSignatureClick?.onClick(timeSignature)
+            }
         }
     }
 
