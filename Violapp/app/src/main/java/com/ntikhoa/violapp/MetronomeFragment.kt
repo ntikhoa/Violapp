@@ -37,12 +37,6 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         ft.commit()
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onClick(timeSignature: Int) {
         val tickFragment = TickFragmentFactory().createTickFragment(timeSignature)
         if (tickFragment != null) {
@@ -51,5 +45,10 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
             ft.replace(R.id.fragment_container_tick, tickFragment)
             ft.commit()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

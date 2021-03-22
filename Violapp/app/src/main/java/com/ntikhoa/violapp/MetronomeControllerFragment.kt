@@ -8,7 +8,8 @@ import com.ntikhoa.violapp.databinding.FragmentMetronomeControllerBinding
 
 
 class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_controller),
-    ChooseTempoTermFragment.OnItemClickListener {
+    ChooseTempoTermFragment.OnItemClickListener,
+    ChooseTimeSignatureFragment.OnItemClickListener {
 
     companion object {
         private const val MAX_TEMPO = 300
@@ -67,7 +68,6 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
                 replace(R.id.fragment_tempo_term, chooseTempoTermFragment)
                 addToBackStack(null)
             }
-
             chooseTempoTermFragment.onItemClickListener = this
         }
     }
@@ -84,11 +84,13 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
 
     private fun setOnClickTimeSignature() {
         binding.textViewTimeSignature.setOnClickListener {
-            if (onTimeSignatureClick != null) {
-                //continue here
-                val timeSignature = 9
-                onTimeSignatureClick?.onClick(timeSignature)
+            val fragment = ChooseTimeSignatureFragment()
+            parentFragmentManager.commit {
+                setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down)
+                replace(R.id.fragment_container, fragment)
+                addToBackStack(null)
             }
+            fragment.onItemClickListener = this
         }
     }
 
@@ -100,12 +102,20 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
         }
     }
 
+    override fun onClick(timeSignature: Int) {
+        if (onTimeSignatureClick != null) {
+            binding.textViewTimeSignature.text = timeSignature.toString()
+            onTimeSignatureClick?.onClick(timeSignature)
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
 
+
     interface OnTimeSignatureClick {
-        fun onClick(layoutResId: Int)
+        fun onClick(timeSignature: Int)
     }
 }
