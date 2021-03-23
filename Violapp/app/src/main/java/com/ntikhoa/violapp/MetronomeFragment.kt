@@ -7,12 +7,15 @@ import com.ntikhoa.violapp.databinding.FragmentMetronomeBinding
 
 
 class MetronomeFragment : Fragment(R.layout.fragment_metronome),
-    MetronomeControllerFragment.OnTimeSignatureClick {
+    MetronomeControllerFragment.OnTimeSignatureClick,
+    MetronomeControllerFragment.OnPlayBtnClick {
 
     private var _binding: FragmentMetronomeBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var controller: MetronomeControllerFragment
+
+    private var tickFragment: TickFragment? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,24 +28,26 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     private fun addControllerFragment() {
         val ft = childFragmentManager.beginTransaction()
         controller = MetronomeControllerFragment()
-        controller.onTimeSignatureClick = this
         ft.replace(R.id.fragment_controller, controller)
         ft.commit()
+        controller.onTimeSignatureClick = this
+        controller.onPlayBtnClick = this
     }
 
     private fun addTickFragment() {
         val ft = childFragmentManager.beginTransaction()
-        val tickFragment = TickFragment(R.layout.fragment_2_tick)
-        ft.replace(R.id.fragment_container_tick, tickFragment)
+        tickFragment = TickFragment(R.layout.fragment_9_tick)
+        if (tickFragment != null)
+            ft.replace(R.id.fragment_container_tick, tickFragment!!)
         ft.commit()
     }
 
     override fun onClick(timeSignature: Int) {
-        val tickFragment = TickFragmentFactory().createTickFragment(timeSignature)
+        tickFragment = TickFragmentFactory().createTickFragment(timeSignature)
         if (tickFragment != null) {
             val ft = childFragmentManager.beginTransaction()
             ft.setCustomAnimations(R.anim.slide_in_to_left, R.anim.slide_out_to_left, 0, 0)
-            ft.replace(R.id.fragment_container_tick, tickFragment)
+            ft.replace(R.id.fragment_container_tick, tickFragment!!)
             ft.commit()
         }
     }
@@ -50,5 +55,10 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(isChecked: Boolean) {
+        if (tickFragment != null)
+            tickFragment?.isPlayed?.postValue(isChecked)
     }
 }

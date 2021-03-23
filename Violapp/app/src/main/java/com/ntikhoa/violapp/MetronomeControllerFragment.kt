@@ -20,6 +20,7 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
     private val binding get() = _binding!!
 
     var onTimeSignatureClick: OnTimeSignatureClick? = null
+    var onPlayBtnClick: OnPlayBtnClick? = null
 
     private val tempo get() = Integer.parseInt(binding.viewTempo.textViewTempo.text.toString())
 
@@ -32,6 +33,7 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
         setOnClickIncrDecrBtn()
         setOnClickTempoTerm()
         setOnClickTimeSignature()
+        setOnClickPlayButton()
     }
 
     private fun setOnClickIncrDecrBtn() {
@@ -94,6 +96,14 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
         }
     }
 
+    private fun setOnClickPlayButton() {
+        binding.btnPlay.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (onPlayBtnClick != null) {
+                onPlayBtnClick?.onClick(isChecked)
+            }
+        }
+    }
+
     override fun onClick(tempoTerm: TempoTerm) {
         binding.apply {
             textViewTempoTerm.text = tempoTerm.term
@@ -117,5 +127,9 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
 
     interface OnTimeSignatureClick {
         fun onClick(timeSignature: Int)
+    }
+
+    interface OnPlayBtnClick {
+        fun onClick(isChecked: Boolean)
     }
 }
