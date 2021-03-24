@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/metronomeFragment"
-        android:name="com.ntikhoa.violapp.MetronomeFragment"
+        android:name="com.ntikhoa.violapp.ui.MetronomeFragment"
         android:label="fragment_metronome"
         tools:layout="@layout/fragment_metronome" >
     </fragment>

@@ -11,6 +11,7 @@
     <string name="bpm">BPM</string>
     <string name="default_tempo_term">Adagio</string>
     <string name="not_supported_yet">Not supported, yet</string>
+    <string name="default_time_signature">2</string>
 
     <integer-array name="time_signature">
         <item>1</item>

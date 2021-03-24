@@ -1,7 +1,8 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.factory
 
 import android.view.View
 import android.widget.ToggleButton
+import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.*
 
 class TickFragmentButtonFactory {

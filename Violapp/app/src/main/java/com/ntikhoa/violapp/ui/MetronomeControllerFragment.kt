@@ -1,10 +1,12 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentMetronomeControllerBinding
+import com.ntikhoa.violapp.model.TempoTerm
 
 
 class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_controller),
@@ -98,9 +100,20 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
 
     private fun setOnClickPlayButton() {
         binding.btnPlay.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            lockAndUnlockButton(!isChecked)
             if (onPlayBtnClick != null) {
-                onPlayBtnClick?.onClick(isChecked)
+                onPlayBtnClick?.onClick(isChecked, tempo)
             }
+        }
+    }
+
+    private fun lockAndUnlockButton(clickable: Boolean) {
+        binding.apply {
+            btnIncr.isClickable = clickable
+            btnDecr.isClickable = clickable
+            textViewTempoTerm.isClickable = clickable
+            textViewTimeSignature.isClickable = clickable
         }
     }
 
@@ -130,6 +143,6 @@ class MetronomeControllerFragment : Fragment(R.layout.fragment_metronome_control
     }
 
     interface OnPlayBtnClick {
-        fun onClick(isChecked: Boolean)
+        fun onClick(isChecked: Boolean, tempo: Int)
     }
 }

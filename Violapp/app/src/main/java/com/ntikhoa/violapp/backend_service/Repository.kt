@@ -1,15 +1,17 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.backend_service
 
 import android.content.Context
 import android.media.MediaPlayer
 import android.widget.ToggleButton
+import com.ntikhoa.violapp.R
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlin.math.ln
 
 class Repository(
     val context: Context,
-    val buttons: List<ToggleButton>
+    private val buttons: List<ToggleButton>
 ) {
 
     private val tickSound = MediaPlayer.create(context, R.raw.metronome_tick)
@@ -19,31 +21,32 @@ class Repository(
 
     private lateinit var job: Job
 
-    fun start() {
+    fun start(tempo: Int) {
         job = Job()
+        val delayFrequency = calculateDelayFrequency(tempo)
         CoroutineScope(IO + job).launch {
             while (true) {
                 async {
                     tickSound.start()
                     tickButton()
-                    delay(1000)
+                    delay(delayFrequency)
                 }.await()
             }
         }
     }
 
-    fun tickButton() {
+    private fun calculateDelayFrequency(tempo: Int): Long {
+        //tempo = BPM: Beat per minute
+        //calculate the time of one beat in milliseconds
+        //one beat = 60 seconds * 1000 milliseconds / BPM
+        return (60 * 1000 / tempo).toLong()
+    }
+
+    private fun tickButton() {
         CoroutineScope(Main).launch {
             buttons[lastIndex].isChecked = false
             buttons[index].isChecked = true
             count++
-        }
-    }
-
-    fun resetMetronome() {
-        CoroutineScope(Main).launch {
-            buttons[lastIndex].isChecked = false
-            count = buttons.size
         }
     }
 
@@ -52,5 +55,22 @@ class Repository(
             job.cancel()
             resetMetronome()
         }
+    }
+
+    private fun resetMetronome() {
+        CoroutineScope(Main).launch {
+            buttons[lastIndex].isChecked = false
+            count = buttons.size
+        }
+    }
+
+    fun mute() {
+        tickSound.setVolume(0f, 0f)
+    }
+
+    fun unmute() {
+        val maxVolume = 100
+        val volume = (ln(maxVolume.toDouble()) / ln(maxVolume.toDouble())).toFloat()
+        tickSound.setVolume(volume, volume)
     }
 }

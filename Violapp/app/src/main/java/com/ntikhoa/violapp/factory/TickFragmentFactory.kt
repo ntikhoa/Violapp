@@ -1,4 +1,7 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.factory
+
+import com.ntikhoa.violapp.R
+import com.ntikhoa.violapp.ui.TickFragment
 
 
 class TickFragmentFactory {

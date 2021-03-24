@@ -1,11 +1,12 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.ntikhoa.violapp.databinding.TimeSignatureItemBinding
+import com.ntikhoa.violapp.R
+import com.ntikhoa.violapp.databinding.ItemTimeSignatureBinding
 
 class TimeSignatureAdapter(
     private val context: Context,
@@ -18,7 +19,7 @@ class TimeSignatureAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeSignatureViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = TimeSignatureItemBinding.inflate(inflater, parent, false)
+        val binding = ItemTimeSignatureBinding.inflate(inflater, parent, false)
         return TimeSignatureViewHolder(binding)
     }
 
@@ -28,7 +29,7 @@ class TimeSignatureAdapter(
 
     override fun getItemCount() = timeSignatures.size
 
-    inner class TimeSignatureViewHolder(private val binding: TimeSignatureItemBinding) :
+    inner class TimeSignatureViewHolder(private val binding: ItemTimeSignatureBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {

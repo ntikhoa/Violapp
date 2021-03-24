@@ -3,10 +3,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_container"
-    tools:context=".MetronomeControllerFragment">
+    tools:context=".ui.MetronomeControllerFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,8 +78,8 @@
             android:focusable="true"
             android:gravity="center"
             android:text="@string/default_tempo_term"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/orange"
-            android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_play"
@@ -88,14 +88,13 @@
 
         <TextView
             android:id="@+id/text_view_time_signature"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="4/4"
+            android:text="@string/default_time_signature"
             android:textColor="@color/orange"
-            android:textSize="36sp"
+            android:textSize="48sp"
             android:textStyle="bold"
-            app:backgroundTint="@color/gray_transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_play"

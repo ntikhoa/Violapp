@@ -1,9 +1,12 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import com.ntikhoa.violapp.R
+import com.ntikhoa.violapp.adapter.TempoTermAdapter
 import com.ntikhoa.violapp.databinding.FragmentChooseTempoTermBinding
+import com.ntikhoa.violapp.model.TempoTerm
 
 
 class ChooseTempoTermFragment : Fragment(R.layout.fragment_choose_tempo_term),

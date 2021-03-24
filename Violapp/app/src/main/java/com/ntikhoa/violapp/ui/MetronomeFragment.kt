@@ -1,9 +1,11 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentMetronomeBinding
+import com.ntikhoa.violapp.factory.TickFragmentFactory
 
 
 class MetronomeFragment : Fragment(R.layout.fragment_metronome),
@@ -23,6 +25,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
 
         addControllerFragment()
         addTickFragment()
+        setOnBtnMuteListener()
     }
 
     private fun addControllerFragment() {
@@ -42,6 +45,14 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         ft.commit()
     }
 
+    private fun setOnBtnMuteListener() {
+        binding.btnMute.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (tickFragment != null) {
+                tickFragment?.isMuted?.postValue(isChecked)
+            }
+        }
+    }
+
     override fun onClick(timeSignature: Int) {
         tickFragment = TickFragmentFactory().createTickFragment(timeSignature)
         if (tickFragment != null) {
@@ -57,8 +68,10 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         _binding = null
     }
 
-    override fun onClick(isChecked: Boolean) {
-        if (tickFragment != null)
+    override fun onClick(isChecked: Boolean, tempo: Int) {
+        if (tickFragment != null) {
             tickFragment?.isPlayed?.postValue(isChecked)
+            tickFragment?.tempo = tempo
+        }
     }
 }

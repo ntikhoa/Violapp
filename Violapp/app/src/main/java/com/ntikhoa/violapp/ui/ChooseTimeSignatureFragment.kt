@@ -1,10 +1,12 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.ntikhoa.violapp.R
+import com.ntikhoa.violapp.adapter.TimeSignatureAdapter
 import com.ntikhoa.violapp.databinding.FragmentChooseTimeSignatureBinding
 
 class ChooseTimeSignatureFragment : Fragment(R.layout.fragment_choose_time_signature),

@@ -7,7 +7,7 @@
     android:background="@color/black_transparent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ChooseTimeSignatureFragment">
+    tools:context=".ui.ChooseTimeSignatureFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

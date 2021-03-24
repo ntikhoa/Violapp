@@ -1,11 +1,13 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.ntikhoa.violapp.databinding.TempoTermItemBinding
+import com.ntikhoa.violapp.R
+import com.ntikhoa.violapp.model.TempoTerm
+import com.ntikhoa.violapp.databinding.ItemTempoTermBinding
 
 class TempoTermAdapter(val context: Context, val currentTempo: Int) :
     RecyclerView.Adapter<TempoTermAdapter.TempoTermViewHolder>() {
@@ -16,7 +18,7 @@ class TempoTermAdapter(val context: Context, val currentTempo: Int) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TempoTermViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = TempoTermItemBinding.inflate(inflater, parent, false)
+        val binding = ItemTempoTermBinding.inflate(inflater, parent, false)
         return TempoTermViewHolder(binding)
     }
 
@@ -26,7 +28,7 @@ class TempoTermAdapter(val context: Context, val currentTempo: Int) :
 
     override fun getItemCount() = TEMPO_TERMS.size
 
-    inner class TempoTermViewHolder(val binding: TempoTermItemBinding) :
+    inner class TempoTermViewHolder(val binding: ItemTempoTermBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
