@@ -48,7 +48,6 @@ class TimeSignatureAdapter(
                 text = timeSignature.toString()
                 when (timeSignature) {
                     currentTimeSignature -> setViewCurrentTimeSignature()
-
                     2, 3, 4, 6, 9 -> setViewChoosableTimeSignature()
                 }
             }
