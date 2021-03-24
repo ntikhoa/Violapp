@@ -95,7 +95,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     private fun setOnClickTempoTerm() {
         controllerBinding.textViewTempoTerm.setOnClickListener {
             val chooseTempoTermFragment = ChooseTempoTermFragment.newInstance(tempo)
-            parentFragmentManager.commit {
+            childFragmentManager.commit {
                 //set animation before replace or add fragment
                 setCustomAnimations(0, 0, 0, R.anim.scrold_up)
                 replace(R.id.fragment_container_tempo_term, chooseTempoTermFragment)
@@ -110,7 +110,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         controllerBinding.apply {
             textViewTempoTerm.text = tempoTerm.term
             textViewTempo.text = tempoTerm.getAVGtempo().toString()
-            parentFragmentManager.popBackStack()
+            childFragmentManager.popBackStack()
         }
     }
 
