@@ -1,7 +1,7 @@
 package com.ntikhoa.violapp.factory
 
 import com.ntikhoa.violapp.R
-import com.ntikhoa.violapp.ui.TickFragment
+import com.ntikhoa.violapp.ui.metronome.TickFragment
 
 
 class TickFragmentFactory {

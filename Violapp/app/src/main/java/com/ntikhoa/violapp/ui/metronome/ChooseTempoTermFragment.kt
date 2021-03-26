@@ -1,4 +1,4 @@
-package com.ntikhoa.violapp.ui
+package com.ntikhoa.violapp.ui.metronome
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

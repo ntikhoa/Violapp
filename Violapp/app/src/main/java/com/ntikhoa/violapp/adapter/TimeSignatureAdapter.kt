@@ -36,7 +36,8 @@ class TimeSignatureAdapter(
             binding.btnTimeSignature.setOnClickListener {
                 if (onItemClickListener != null) {
                     val position = adapterPosition
-                    if (position != RecyclerView.NO_POSITION) {
+                    if (position != RecyclerView.NO_POSITION
+                        && position != currentTimeSignature - 1) {
                         onItemClickListener?.onClick(timeSignatures[position])
                     }
                 }

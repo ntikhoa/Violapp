@@ -1,4 +1,4 @@
-package com.ntikhoa.violapp.ui
+package com.ntikhoa.violapp.ui.metronome
 
 import android.os.Bundle
 import android.view.View
@@ -21,10 +21,11 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
 
     private var _binding: FragmentMetronomeBinding? = null
     private val binding get() = _binding!!
-    private val headerBinding get() = binding.header
-    private val controllerBinding get() = binding.controller
 
-    private val tempo get() = Integer.parseInt(binding.controller.textViewTempo.text.toString())
+    private val tempo
+        get() = Integer.parseInt(binding.controller.textViewTempo.text.toString())
+    private val timeSignature
+        get() = Integer.parseInt(binding.controller.textViewTimeSignature.text.toString())
 
     private val tempoTerms get() = TempoTerm.TEMPO_TERMS
 
@@ -52,7 +53,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun setOnBtnMuteListener() {
-        headerBinding.btnMute.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.header.btnMute.setOnCheckedChangeListener { buttonView, isChecked ->
             if (tickFragment != null) {
                 tickFragment?.isMuted?.postValue(isChecked)
             }
@@ -60,14 +61,14 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun setOnClickIncrDecrBtn() {
-        controllerBinding.apply {
+        binding.controller.apply {
             btnIncr.setOnClickListener(onBtnIncrDecrClickListener)
             btnDecr.setOnClickListener(onBtnIncrDecrClickListener)
         }
     }
 
     private val onBtnIncrDecrClickListener = View.OnClickListener {
-        controllerBinding.apply {
+        binding.controller.apply {
             when (it.id) {
                 btnIncr.id -> {
                     if (tempo < MAX_TEMPO)
@@ -87,13 +88,13 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
             if (tempo >= tempoTerms[index].minTempo
                 && tempo >= tempoTerms[index].maxTempo
             ) {
-                controllerBinding.textViewTempoTerm.text = tempoTerms[index].term
+                binding.controller.textViewTempoTerm.text = tempoTerms[index].term
             }
         }
     }
 
     private fun setOnClickTempoTerm() {
-        controllerBinding.textViewTempoTerm.setOnClickListener {
+        binding.controller.textViewTempoTerm.setOnClickListener {
             val chooseTempoTermFragment = ChooseTempoTermFragment.newInstance(tempo)
             childFragmentManager.commit {
                 //set animation before replace or add fragment
@@ -105,9 +106,9 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         }
     }
 
-    //on tempo term click listener
+    //on item tempo term click listener
     override fun onClick(tempoTerm: TempoTerm) {
-        controllerBinding.apply {
+        binding.controller.apply {
             textViewTempoTerm.text = tempoTerm.term
             textViewTempo.text = tempoTerm.getAVGtempo().toString()
             childFragmentManager.popBackStack()
@@ -115,8 +116,8 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun setOnClickTimeSignature() {
-        controllerBinding.textViewTimeSignature.setOnClickListener {
-            val fragment = ChooseTimeSignatureFragment()
+        binding.controller.textViewTimeSignature.setOnClickListener {
+            val fragment = ChooseTimeSignatureFragment.newInstance(timeSignature)
             childFragmentManager.commit {
                 setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down)
                 replace(R.id.controller, fragment)
@@ -126,19 +127,22 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         }
     }
 
-    //on time signature click listener
+    //on item time signature click listener
     override fun onClick(timeSignature: Int) {
+        binding.controller.textViewTimeSignature.text = timeSignature.toString()
+
         tickFragment = TickFragmentFactory().createTickFragment(timeSignature)
         if (tickFragment != null) {
             childFragmentManager.commit {
                 setCustomAnimations(R.anim.slide_in_to_left, R.anim.slide_out_to_left, 0, 0)
                 replace(R.id.fragment_container_tick, tickFragment!!)
             }
+            childFragmentManager.popBackStack()
         }
     }
 
     private fun setOnClickPlayButton() {
-        controllerBinding.btnPlay.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.controller.btnPlay.setOnCheckedChangeListener { buttonView, isChecked ->
             lockAndUnlockButton(!isChecked)
             if (tickFragment != null) {
                 tickFragment?.isPlayed?.postValue(isChecked)
@@ -148,7 +152,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun lockAndUnlockButton(clickable: Boolean) {
-        controllerBinding.apply {
+        binding.controller.apply {
             btnIncr.isClickable = clickable
             btnDecr.isClickable = clickable
             textViewTempoTerm.isClickable = clickable

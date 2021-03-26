@@ -1,4 +1,4 @@
-package com.ntikhoa.violapp.ui
+package com.ntikhoa.violapp.ui.metronome
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,29 @@ class ChooseTimeSignatureFragment : Fragment(R.layout.fragment_choose_time_signa
     private var _binding: FragmentChooseTimeSignatureBinding? = null
     private val binding get() = _binding!!
 
+    private var timeSignature = DEFAULT_TIME_SIGNATURE
+
     var onItemClickListener: OnItemClickListener? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            timeSignature = it.getInt(TIME_SIGNATURE)
+        }
+    }
+
+    companion object {
+        private const val TIME_SIGNATURE = "time signature"
+        private const val DEFAULT_TIME_SIGNATURE = 2
+
+        @JvmStatic
+        fun newInstance(timeSignature: Int) =
+            ChooseTimeSignatureFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(TIME_SIGNATURE, timeSignature)
+                }
+            }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,7 +45,7 @@ class ChooseTimeSignatureFragment : Fragment(R.layout.fragment_choose_time_signa
 
         val adapter = TimeSignatureAdapter(
             requireContext(),
-            2,
+            timeSignature,
             resources.getIntArray(R.array.time_signature)
         )
         adapter.onItemClickListener = this
