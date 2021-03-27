@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Violapp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shared_tempo">shared tempo</string>
+    <string name="shared_time_signature">shared time signature</string>
     <string name="tempo">TEMPO</string>
     <string name="default_tempo_60">60</string>
     <string name="increase_tempo">increase tempo</string>
