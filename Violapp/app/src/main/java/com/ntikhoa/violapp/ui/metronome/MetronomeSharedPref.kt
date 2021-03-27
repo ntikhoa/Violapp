@@ -2,12 +2,18 @@ package com.ntikhoa.violapp.ui.metronome
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import com.ntikhoa.violapp.R
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-
-class MetronomeSharedPref(private val context: Context) {
-
-    private val sharedPref = context.getSharedPreferences("cc gi cung dc", MODE_PRIVATE)
+@Singleton
+class MetronomeSharedPref @Inject
+constructor(
+    @ApplicationContext val context: Context,
+    private val sharedPref: SharedPreferences
+) {
 
     private val DEFAULT_TIME_SIGNATURE = 2
 

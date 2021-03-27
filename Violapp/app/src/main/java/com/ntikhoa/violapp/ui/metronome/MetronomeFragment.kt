@@ -1,7 +1,5 @@
 package com.ntikhoa.violapp.ui.metronome
 
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,8 +8,10 @@ import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentMetronomeBinding
 import com.ntikhoa.violapp.factory.TickFragmentFactory
 import com.ntikhoa.violapp.model.TempoTerm
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     ChooseTempoTermFragment.OnItemClickListener,
     ChooseTimeSignatureFragment.OnItemClickListener {
@@ -29,7 +29,8 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     private val timeSignature
         get() = Integer.parseInt(binding.controller.textViewTimeSignature.text.toString())
 
-    private lateinit var sharedPref: MetronomeSharedPref
+    @Inject
+    lateinit var sharedPref: MetronomeSharedPref
 
     private val tempoTerms get() = TempoTerm.TEMPO_TERMS
 
@@ -38,8 +39,6 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMetronomeBinding.bind(view)
-
-        sharedPref = MetronomeSharedPref(requireContext())
 
         getSavedTempo()
         addTickFragment()
