@@ -19,7 +19,6 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     companion object {
         private const val MAX_TEMPO = 300
         private const val MIN_TEMPO = 20
-        private const val DEFAULT_TIME_SIGNATURE = 2
     }
 
     private var _binding: FragmentMetronomeBinding? = null
@@ -30,7 +29,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     private val timeSignature
         get() = Integer.parseInt(binding.controller.textViewTimeSignature.text.toString())
 
-    private lateinit var sharedPref: SharedPreferences
+    private lateinit var sharedPref: MetronomeSharedPref
 
     private val tempoTerms get() = TempoTerm.TEMPO_TERMS
 
@@ -40,10 +39,11 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMetronomeBinding.bind(view)
 
-        sharedPref = requireActivity().getPreferences(MODE_PRIVATE)
+        sharedPref = MetronomeSharedPref(requireContext())
 
         getSavedTempo()
         addTickFragment()
+        getSavedMuteState()
 
         setOnBtnMuteListener()
         setOnClickIncrDecrBtn()
@@ -53,7 +53,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun getSavedTempo() {
-        val savedTempo = sharedPref.getInt(getString(R.string.shared_tempo), -1)
+        val savedTempo = sharedPref.getTempo()
         if (savedTempo != -1) {
             binding.controller.textViewTempo.text = savedTempo.toString()
             setTempoTerm()
@@ -61,7 +61,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun addTickFragment() {
-        val savedTimeSignature = getSavedTimeSignature()
+        val savedTimeSignature = sharedPref.getTimeSignature()
         tickFragment = TickFragmentFactory().createTickFragment(savedTimeSignature)
         if (tickFragment != null) {
             childFragmentManager.commit {
@@ -71,15 +71,18 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
         binding.controller.textViewTimeSignature.text = savedTimeSignature.toString()
     }
 
-    private fun getSavedTimeSignature(): Int {
-        val savedTimeSignature = sharedPref.getInt(getString(R.string.shared_time_signature), DEFAULT_TIME_SIGNATURE)
-        return savedTimeSignature
+    private fun getSavedMuteState() {
+        val isMuted = sharedPref.getSavedMuteState()
+        binding.header.btnMute.isChecked = isMuted
+        if (tickFragment != null)
+            tickFragment?.isMuted?.postValue(isMuted)
     }
 
     private fun setOnBtnMuteListener() {
         binding.header.btnMute.setOnCheckedChangeListener { buttonView, isChecked ->
             if (tickFragment != null) {
                 tickFragment?.isMuted?.postValue(isChecked)
+                sharedPref.saveMuteState(isChecked)
             }
         }
     }
@@ -96,13 +99,14 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
             when (it.id) {
                 btnIncr.id -> {
                     if (tempo < MAX_TEMPO)
-                        setAndSaveTempo(tempo + 1)
+                        binding.controller.textViewTempo.text = (tempo + 1).toString()
                 }
                 btnDecr.id -> {
                     if (tempo > MIN_TEMPO)
-                        setAndSaveTempo(tempo - 1)
+                        binding.controller.textViewTempo.text = (tempo - 1).toString()
                 }
             }
+            sharedPref.saveTempo(tempo)
             setTempoTerm()
         }
     }
@@ -134,7 +138,8 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     override fun onClick(tempoTerm: TempoTerm) {
         binding.controller.apply {
             textViewTempoTerm.text = tempoTerm.term
-            setAndSaveTempo(tempoTerm.getAVGtempo())
+            binding.controller.textViewTempo.text = tempoTerm.getAVGtempo().toString()
+            sharedPref.saveTempo(tempo)
             childFragmentManager.popBackStack()
         }
     }
@@ -162,7 +167,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
                 replace(R.id.fragment_container_tick, tickFragment!!)
             }
             childFragmentManager.popBackStack()
-            saveTimeSignature()
+            sharedPref.saveTimeSignature(timeSignature)
         }
     }
 
@@ -183,23 +188,6 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
             textViewTempoTerm.isClickable = clickable
             textViewTimeSignature.isClickable = clickable
         }
-    }
-
-    private fun setAndSaveTempo(tempo: Int) {
-        binding.controller.textViewTempo.text = tempo.toString()
-        saveTempo()
-    }
-
-    private fun saveTempo() {
-        sharedPref.edit()
-            .putInt(getString(R.string.shared_tempo), tempo)
-            .apply()
-    }
-
-    private fun saveTimeSignature() {
-        sharedPref.edit()
-            .putInt(getString(R.string.shared_time_signature), timeSignature)
-            .apply()
     }
 
     override fun onDestroyView() {

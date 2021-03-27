@@ -2,6 +2,7 @@
     <string name="app_name">Violapp</string>
     <string name="shared_tempo">shared tempo</string>
     <string name="shared_time_signature">shared time signature</string>
+    <string name="shared_mute_state">shared mute state</string>
     <string name="tempo">TEMPO</string>
     <string name="default_tempo_60">60</string>
     <string name="increase_tempo">increase tempo</string>
