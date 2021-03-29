@@ -15,7 +15,9 @@ constructor(
     private val sharedPref: SharedPreferences
 ) {
 
-    private val DEFAULT_TIME_SIGNATURE = 2
+    companion object {
+        private const val DEFAULT_TIME_SIGNATURE = 2
+    }
 
     fun saveTempo(tempo: Int) {
         sharedPref.edit()

@@ -2,6 +2,9 @@ package com.ntikhoa.violapp.di
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.media.MediaPlayer
+import com.ntikhoa.violapp.R
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +16,10 @@ import dagger.hilt.components.SingletonComponent
 class AppModule {
 
     @Provides
-    fun providesSharedPref(@ApplicationContext context: Context) =
-        context.getSharedPreferences("cc gi cung dc", MODE_PRIVATE)
+    fun providesSharedPref(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences(context.getString(R.string.file_metronome), MODE_PRIVATE)
+
+    @Provides
+    fun providesTickSound(@ApplicationContext context: Context): MediaPlayer =
+        MediaPlayer.create(context, R.raw.metronome_tick)
 }

@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Violapp</string>
-    <string name="shared_tempo">shared tempo</string>
-    <string name="shared_time_signature">shared time signature</string>
-    <string name="shared_mute_state">shared mute state</string>
     <string name="tempo">TEMPO</string>
     <string name="default_tempo_60">60</string>
     <string name="increase_tempo">increase tempo</string>
@@ -13,6 +10,11 @@
     <string name="default_tempo_term">Adagio</string>
     <string name="not_supported_yet">Not supported, yet</string>
     <string name="default_time_signature">2</string>
+
+    <string name="file_metronome">file metronome</string>
+    <string name="shared_tempo">shared tempo</string>
+    <string name="shared_time_signature">shared time signature</string>
+    <string name="shared_mute_state">shared mute state</string>
 
     <integer-array name="time_signature">
         <item>1</item>
