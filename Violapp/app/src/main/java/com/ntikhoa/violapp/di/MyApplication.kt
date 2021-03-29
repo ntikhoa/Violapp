@@ -1,4 +1,4 @@
-package com.ntikhoa.violapp
+package com.ntikhoa.violapp.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

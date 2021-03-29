@@ -9,12 +9,14 @@ import com.ntikhoa.violapp.databinding.FragmentMetronomeBinding
 import com.ntikhoa.violapp.factory.TickFragmentFactory
 import com.ntikhoa.violapp.model.TempoTerm
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     ChooseTempoTermFragment.OnItemClickListener,
-    ChooseTimeSignatureFragment.OnItemClickListener {
+    ChooseTimeSignatureFragment.OnItemClickListener,
+    OnHoldButtonListener.OnHoldBtnCallback {
 
     companion object {
         private const val MAX_TEMPO = 300
@@ -24,13 +26,15 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     private var _binding: FragmentMetronomeBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var onHoldButtonListener: OnHoldButtonListener
+    @Inject
+    lateinit var sharedPref: MetronomeSharedPref
+
     private val tempo
         get() = Integer.parseInt(binding.controller.textViewTempo.text.toString())
     private val timeSignature
         get() = Integer.parseInt(binding.controller.textViewTimeSignature.text.toString())
-
-    @Inject
-    lateinit var sharedPref: MetronomeSharedPref
 
     private val tempoTerms get() = TempoTerm.TEMPO_TERMS
 
@@ -88,21 +92,23 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
 
     private fun setOnClickIncrDecrBtn() {
         binding.controller.apply {
-            btnIncr.setOnClickListener(onBtnIncrDecrClickListener)
-            btnDecr.setOnClickListener(onBtnIncrDecrClickListener)
+            onHoldButtonListener.onHoldBtnCallback = this@MetronomeFragment
+            btnIncr.setOnTouchListener(onHoldButtonListener)
+            btnDecr.setOnTouchListener(onHoldButtonListener)
         }
     }
 
-    private val onBtnIncrDecrClickListener = View.OnClickListener {
+    //on Hold btn Incr Decr tempo
+    override fun onHold(v: View?) {
         binding.controller.apply {
-            when (it.id) {
+            when (v?.id) {
                 btnIncr.id -> {
                     if (tempo < MAX_TEMPO)
-                        binding.controller.textViewTempo.text = (tempo + 1).toString()
+                        textViewTempo.text = (tempo + 1).toString()
                 }
                 btnDecr.id -> {
                     if (tempo > MIN_TEMPO)
-                        binding.controller.textViewTempo.text = (tempo - 1).toString()
+                        textViewTempo.text = (tempo - 1).toString()
                 }
             }
             sharedPref.saveTempo(tempo)
