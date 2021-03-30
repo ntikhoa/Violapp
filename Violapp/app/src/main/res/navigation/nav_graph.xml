@@ -3,12 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/metronomeFragment">
+    app:startDestination="@id/menuFragment">
 
     <fragment
         android:id="@+id/metronomeFragment"
         android:name="com.ntikhoa.violapp.ui.metronome.MetronomeFragment"
         android:label="fragment_metronome"
-        tools:layout="@layout/fragment_metronome" >
+        tools:layout="@layout/fragment_metronome" />
+    <fragment
+        android:id="@+id/sampleSoundFragment"
+        android:name="com.ntikhoa.violapp.ui.sample_sound.SampleSoundFragment"
+        android:label="fragment_sample_sound"
+        tools:layout="@layout/fragment_sample_sound" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.ntikhoa.violapp.ui.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_metronomeFragment"
+            app:destination="@id/metronomeFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            app:popExitAnim="@anim/slide_out_to_right" />
+        <action
+            android:id="@+id/action_menuFragment_to_sampleSoundFragment"
+            app:destination="@id/sampleSoundFragment"
+            app:enterAnim="@anim/slide_in_to_left"
+            app:exitAnim="@anim/slide_out_to_left"
+            app:popEnterAnim="@anim/slide_in_to_right"
+            app:popExitAnim="@anim/slide_out_to_right" />
     </fragment>
 </navigation>
