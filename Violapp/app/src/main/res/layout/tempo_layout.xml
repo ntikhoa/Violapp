@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/default_tempo_60"
-        android:textColor="@color/orange"
+        android:textColor="@color/teal"
         android:textSize="64sp" />
 
     <TextView

@@ -59,7 +59,7 @@ class TimeSignatureAdapter(
                 setBackgroundColor(
                     ContextCompat.getColor(
                         context,
-                        R.color.orange
+                        R.color.teal
                     )
                 )
                 setTextColor(

@@ -22,7 +22,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/orange" />
+            android:background="@color/teal" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_tick"

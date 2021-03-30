@@ -50,8 +50,8 @@ class TempoTermAdapter(val context: Context, val currentTempo: Int) :
 
                 if (currentTempo >= tempoTerm.minTempo
                     && currentTempo <= tempoTerm.maxTempo) {
-                    textViewTempoTerm.setTextColor(ContextCompat.getColor(context, R.color.orange))
-                    textViewTempoRange.setTextColor(ContextCompat.getColor(context, R.color.orange))
+                    textViewTempoTerm.setTextColor(ContextCompat.getColor(context, R.color.teal))
+                    textViewTempoRange.setTextColor(ContextCompat.getColor(context, R.color.teal))
                 }
             }
         }
