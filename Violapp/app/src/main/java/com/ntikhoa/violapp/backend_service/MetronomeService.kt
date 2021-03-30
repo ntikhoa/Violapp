@@ -41,7 +41,7 @@ class MetronomeService @Inject constructor(private val tickSound: MediaPlayer) {
         return (60 * 1000 / tempo).toLong()
     }
 
-    fun cancelMetronome() {
+    fun cancel() {
         if (this::job.isInitialized) {
             job.cancel()
             if (onCancelMetronomeListener != null) {

@@ -188,8 +188,8 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
 
     private fun lockAndUnlockButton(clickable: Boolean) {
         binding.controller.apply {
-            btnIncr.isClickable = clickable
-            btnDecr.isClickable = clickable
+            btnIncr.isEnabled = clickable
+            btnDecr.isEnabled = clickable
             textViewTempoTerm.isClickable = clickable
             textViewTimeSignature.isClickable = clickable
         }
