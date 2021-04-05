@@ -18,4 +18,5 @@ Violin sample sound is for ear training exercise.
 # Metronome
 ![](Preview/metronome.png)
 # Violin sample sound (developing)
-teaser image
+teaser image\
+![](Preview/sample_sound.png)
