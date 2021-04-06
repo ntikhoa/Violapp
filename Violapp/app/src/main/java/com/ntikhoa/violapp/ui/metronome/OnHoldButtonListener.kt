@@ -19,6 +19,7 @@ class OnHoldButtonListener @Inject constructor() : View.OnTouchListener {
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        v?.performClick()
         when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 onHoldBtnIncrDecr(v)
