@@ -5,11 +5,11 @@ import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.IncludeStringBinding
 import com.ntikhoa.violapp.model.Note
 
-class MapButtonNote(
-    GstrBinding: IncludeStringBinding,
-    DstrBinding: IncludeStringBinding,
-    AstrBinding: IncludeStringBinding,
-    EstrBinding: IncludeStringBinding
+open class MapButtonNote(
+    val GstrBinding: IncludeStringBinding,
+    val DstrBinding: IncludeStringBinding,
+    val AstrBinding: IncludeStringBinding,
+    val EstrBinding: IncludeStringBinding
 ) {
 
     val maps = hashMapOf<ImageButton, Note>(
