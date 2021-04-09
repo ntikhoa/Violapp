@@ -2,6 +2,7 @@ package com.ntikhoa.violapp.model
 
 abstract class Scale() {
 
+    abstract var name: String
     protected abstract var GstrList: List<Int>
     protected abstract var DstrList: List<Int>
     protected abstract var AstrList: List<Int>

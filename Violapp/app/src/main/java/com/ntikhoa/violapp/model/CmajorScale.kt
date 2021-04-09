@@ -4,6 +4,8 @@ import com.ntikhoa.violapp.R
 
 class CmajorScale : Scale() {
 
+    override var name = "C major Scale"
+
     override var GstrList: List<Int> = arrayListOf(
         R.id.btn0,
         R.id.btn2,

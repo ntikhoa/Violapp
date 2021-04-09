@@ -110,7 +110,6 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
