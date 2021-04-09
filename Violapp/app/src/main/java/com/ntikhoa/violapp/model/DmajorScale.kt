@@ -2,10 +2,10 @@ package com.ntikhoa.violapp.model
 
 import com.ntikhoa.violapp.R
 
-class AmajorScale : Scale() {
+class DmajorScale : Scale() {
 
     override var GstrList: List<Int> = arrayListOf(
-        R.id.btn1,
+        R.id.btn0,
         R.id.btn2,
         R.id.btn4,
         R.id.btn6,
@@ -16,7 +16,7 @@ class AmajorScale : Scale() {
         R.id.btn0,
         R.id.btn2,
         R.id.btn4,
-        R.id.btn6,
+        R.id.btn5,
         R.id.btn7
     )
 
@@ -31,7 +31,7 @@ class AmajorScale : Scale() {
     override var EstrList: List<Int> = arrayListOf(
         R.id.btn0,
         R.id.btn2,
-        R.id.btn4,
+        R.id.btn3,
         R.id.btn5,
         R.id.btn7
     )
