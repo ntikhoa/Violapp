@@ -1,4 +1,4 @@
-package com.ntikhoa.violapp.model
+package com.ntikhoa.violapp.model.tempo_term
 
 class TempoTerm(
     val term: String,

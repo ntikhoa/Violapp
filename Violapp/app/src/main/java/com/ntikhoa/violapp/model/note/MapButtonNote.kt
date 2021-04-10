@@ -1,9 +1,8 @@
-package com.ntikhoa.violapp.ui.sample_sound
+package com.ntikhoa.violapp.model.note
 
 import android.widget.ImageButton
 import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.IncludeStringBinding
-import com.ntikhoa.violapp.model.Note
 
 open class MapButtonNote(
     GstrBinding: IncludeStringBinding,

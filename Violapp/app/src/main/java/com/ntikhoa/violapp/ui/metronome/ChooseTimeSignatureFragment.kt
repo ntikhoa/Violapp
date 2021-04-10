@@ -17,6 +17,8 @@ class ChooseTimeSignatureFragment : Fragment(R.layout.fragment_choose_time_signa
 
     private var timeSignature = DEFAULT_TIME_SIGNATURE
 
+    private lateinit var adapter: TimeSignatureAdapter
+
     var onItemClickListener: OnItemClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +45,7 @@ class ChooseTimeSignatureFragment : Fragment(R.layout.fragment_choose_time_signa
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentChooseTimeSignatureBinding.bind(view)
 
-        val adapter = TimeSignatureAdapter(
+        adapter = TimeSignatureAdapter(
             requireContext(),
             timeSignature,
             resources.getIntArray(R.array.time_signature)
@@ -56,8 +58,10 @@ class ChooseTimeSignatureFragment : Fragment(R.layout.fragment_choose_time_signa
         when (timeSignature) {
             2, 3, 4, 6, 9 -> {
                 binding.textViewWarning.visibility = GONE
-                if (onItemClickListener != null) {
-                    onItemClickListener?.onClick(timeSignature)
+                onItemClickListener?.let {
+                    adapter.currentTimeSignature = timeSignature
+                    adapter.notifyDataSetChanged()
+                    it.onClick(timeSignature)
                 }
             }
             else -> {

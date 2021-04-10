@@ -7,7 +7,7 @@ import androidx.fragment.app.commit
 import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentMetronomeBinding
 import com.ntikhoa.violapp.factory.TickFragmentFactory
-import com.ntikhoa.violapp.model.TempoTerm
+import com.ntikhoa.violapp.model.tempo_term.TempoTerm
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -145,7 +145,6 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
             textViewTempoTerm.text = tempoTerm.term
             binding.controller.textViewTempo.text = tempoTerm.getAVGtempo().toString()
             sharedPref.saveTempo(tempo)
-            childFragmentManager.popBackStack()
         }
     }
 
@@ -171,7 +170,6 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
                 setCustomAnimations(R.anim.slide_in_to_left, R.anim.slide_out_to_left, 0, 0)
                 replace(R.id.fragment_container_tick, tickFragment!!)
             }
-            childFragmentManager.popBackStack()
             sharedPref.saveTimeSignature(timeSignature)
         }
     }

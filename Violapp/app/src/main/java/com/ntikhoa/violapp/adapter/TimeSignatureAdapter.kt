@@ -10,7 +10,7 @@ import com.ntikhoa.violapp.databinding.ItemTimeSignatureBinding
 
 class TimeSignatureAdapter(
     private val context: Context,
-    private val currentTimeSignature: Int,
+    var currentTimeSignature: Int,
     private val timeSignatures: IntArray
 ) :
     RecyclerView.Adapter<TimeSignatureAdapter.TimeSignatureViewHolder>() {
@@ -37,7 +37,8 @@ class TimeSignatureAdapter(
                 if (onItemClickListener != null) {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION
-                        && position != currentTimeSignature - 1) {
+                        && position != currentTimeSignature - 1
+                    ) {
                         onItemClickListener?.onClick(timeSignatures[position])
                     }
                 }
@@ -48,36 +49,28 @@ class TimeSignatureAdapter(
             binding.btnTimeSignature.apply {
                 text = timeSignature.toString()
                 when (timeSignature) {
-                    currentTimeSignature -> setViewCurrentTimeSignature()
-                    2, 3, 4, 6, 9 -> setViewChoosableTimeSignature()
+                    currentTimeSignature -> setAllViewColor(R.color.teal, R.color.white)
+                    2, 3, 4, 6, 9 -> setAllViewColor(R.color.white, R.color.black)
+                    else -> setAllViewColor(R.color.gray, R.color.black)
                 }
             }
         }
 
-        private fun setViewCurrentTimeSignature() {
+        private fun setAllViewColor(backgroundColorResId: Int, textColorResId: Int) {
             binding.btnTimeSignature.apply {
                 setBackgroundColor(
                     ContextCompat.getColor(
                         context,
-                        R.color.teal
+                        backgroundColorResId
                     )
                 )
                 setTextColor(
                     ContextCompat.getColor(
                         context,
-                        R.color.white
+                        textColorResId
                     )
                 )
             }
-        }
-
-        private fun setViewChoosableTimeSignature() {
-            binding.btnTimeSignature.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.white
-                )
-            )
         }
     }
 

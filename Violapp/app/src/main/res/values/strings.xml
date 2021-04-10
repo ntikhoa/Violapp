@@ -36,4 +36,5 @@
     <string name="choose_scale">Choose Scale</string>
     <string name="first_position">First Position</string>
     <string name="note_images">note images</string>
+    <string name="image_scale">image scale</string>
 </resources>

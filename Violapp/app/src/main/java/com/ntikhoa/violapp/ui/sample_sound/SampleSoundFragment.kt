@@ -9,20 +9,23 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentSampleSoundBinding
 import com.ntikhoa.violapp.databinding.IncludeStringBinding
-import com.ntikhoa.violapp.model.CmajorScale
+import com.ntikhoa.violapp.model.Scale.CmajorScale
+import com.ntikhoa.violapp.model.Scale.Scale
+import com.ntikhoa.violapp.model.note.MapButtonNote
 
 
 class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
-    View.OnTouchListener {
+    View.OnTouchListener,
+    ChooseScaleFragment.OnItemClickListener {
 
     private var _binding: FragmentSampleSoundBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var mapButtonNote: MapButtonNote
-    private val map get() = mapButtonNote.maps
 
     private val scale = CmajorScale()
 
@@ -80,7 +83,7 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
     }
 
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        val note = map[v as ImageButton]
+        val note = mapButtonNote.maps[v as ImageButton]
         note?.let {
             val mediaPlayer = note.getMediaPlayer(requireContext())
             when (event?.actionMasked) {
@@ -98,20 +101,30 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
     }
 
     private fun setOnScaleClick() {
-        binding.textViewScale.setOnClickListener {
-            for (i in noteBtnList.indices) {
-                val strList = scale.getStrListByIndex(i)
-                for (j in noteBtnList[i].indices) {
-                    if (!strList?.contains(noteBtnList[i][j].id)!!)
-                        noteBtnList[i][j].visibility = INVISIBLE
-                    else noteBtnList[i][j].visibility = VISIBLE
-                }
+        binding.btnScale.setOnClickListener {
+            val fragment = ChooseScaleFragment()
+            childFragmentManager.commit {
+                setCustomAnimations(0, 0, 0, R.anim.scrold_up)
+                replace(R.id.fragment_container_choose_scale, fragment)
+                addToBackStack(null)
             }
+            fragment.onItemClickListener = this
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onClick(scale: Scale) {
+        for (i in noteBtnList.indices) {
+            val strList = scale.getStrListByIndex(i)
+            for (j in noteBtnList[i].indices) {
+                if (!strList?.contains(noteBtnList[i][j].id)!!)
+                    noteBtnList[i][j].visibility = INVISIBLE
+                else noteBtnList[i][j].visibility = VISIBLE
+            }
+        }
     }
 }

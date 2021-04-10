@@ -1,12 +1,13 @@
-package com.ntikhoa.violapp.model
+package com.ntikhoa.violapp.model.Scale
 
 import com.ntikhoa.violapp.R
 
 class DmajorScale : Scale() {
 
-    override var name = "D major Scale"
+    override val name = "D major Scale"
+    override val imageResId = R.drawable.d_major_scale
 
-    override var GstrList: List<Int> = arrayListOf(
+    override val GstrList: List<Int> = arrayListOf(
         R.id.btn0,
         R.id.btn2,
         R.id.btn4,
@@ -14,7 +15,7 @@ class DmajorScale : Scale() {
         R.id.btn7
     )
 
-    override var DstrList: List<Int> = arrayListOf(
+    override val DstrList: List<Int> = arrayListOf(
         R.id.btn0,
         R.id.btn2,
         R.id.btn4,
@@ -22,7 +23,7 @@ class DmajorScale : Scale() {
         R.id.btn7
     )
 
-    override var AstrList: List<Int> = arrayListOf(
+    override val AstrList: List<Int> = arrayListOf(
         R.id.btn0,
         R.id.btn2,
         R.id.btn4,
@@ -30,7 +31,7 @@ class DmajorScale : Scale() {
         R.id.btn7
     )
 
-    override var EstrList: List<Int> = arrayListOf(
+    override val EstrList: List<Int> = arrayListOf(
         R.id.btn0,
         R.id.btn2,
         R.id.btn3,

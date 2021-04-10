@@ -1,4 +1,4 @@
-package com.ntikhoa.violapp.model
+package com.ntikhoa.violapp.model.note
 
 import android.content.Context
 import android.media.MediaPlayer

@@ -6,7 +6,7 @@ import android.view.View
 import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.adapter.TempoTermAdapter
 import com.ntikhoa.violapp.databinding.FragmentChooseTempoTermBinding
-import com.ntikhoa.violapp.model.TempoTerm
+import com.ntikhoa.violapp.model.tempo_term.TempoTerm
 
 
 class ChooseTempoTermFragment : Fragment(R.layout.fragment_choose_tempo_term),
@@ -59,8 +59,8 @@ class ChooseTempoTermFragment : Fragment(R.layout.fragment_choose_tempo_term),
     }
 
     override fun onClick(tempoTerm: TempoTerm) {
-        if (onItemClickListener != null) {
-            onItemClickListener?.onClick(tempoTerm)
+        onItemClickListener?.let {
+            it.onClick(tempoTerm)
         }
     }
 }
