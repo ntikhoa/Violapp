@@ -3,11 +3,12 @@ package com.ntikhoa.violapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.ItemScaleBinding
 import com.ntikhoa.violapp.model.Scale.Scale
 import com.ntikhoa.violapp.model.Scale.ScaleList
 
-class ScaleAdapter : RecyclerView.Adapter<ScaleAdapter.ScaleViewHolder>() {
+class ScaleAdapter(var currentScale: Scale) : RecyclerView.Adapter<ScaleAdapter.ScaleViewHolder>() {
 
     private val scales = ScaleList.scales
 
@@ -36,6 +37,8 @@ class ScaleAdapter : RecyclerView.Adapter<ScaleAdapter.ScaleViewHolder>() {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val scale = scales[position]
+                        currentScale = scale
+                        notifyDataSetChanged()
                         it.onClick(scale)
                     }
                 }
@@ -46,6 +49,10 @@ class ScaleAdapter : RecyclerView.Adapter<ScaleAdapter.ScaleViewHolder>() {
             binding.apply {
                 imageScale.setImageResource(scale.imageResId)
                 textViewScaleName.text = scale.name
+                textViewScaleName.setBackgroundResource(R.color.white)
+                if (scale.name == currentScale.name) {
+                    textViewScaleName.setBackgroundResource(R.color.teal)
+                }
             }
         }
     }

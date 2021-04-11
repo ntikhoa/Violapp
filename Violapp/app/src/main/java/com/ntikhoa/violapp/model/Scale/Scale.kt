@@ -1,6 +1,9 @@
 package com.ntikhoa.violapp.model.Scale
 
-abstract class Scale() {
+import android.os.Parcelable
+
+
+abstract class Scale: Parcelable {
 
     abstract val name: String
     abstract val imageResId: Int

@@ -16,7 +16,7 @@ class ChooseTempoTermFragment : Fragment(R.layout.fragment_choose_tempo_term),
 
     companion object {
         private const val DEFAULT_TEMPO = 60
-        const val CURRENT_TEMPO = "current tempo"
+        private const val CURRENT_TEMPO = "current tempo"
 
         @JvmStatic
         fun newInstance(currentTempo: Int) =

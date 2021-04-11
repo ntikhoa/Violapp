@@ -1,7 +1,10 @@
 package com.ntikhoa.violapp.model.Scale
 
 import com.ntikhoa.violapp.R
+import kotlinx.parcelize.Parcelize
 
+
+@Parcelize
 class AmajorScale : Scale() {
 
     override val name = "A major Scale"

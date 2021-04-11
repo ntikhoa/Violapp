@@ -13,7 +13,7 @@ import androidx.fragment.app.commit
 import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentSampleSoundBinding
 import com.ntikhoa.violapp.databinding.IncludeStringBinding
-import com.ntikhoa.violapp.model.Scale.CmajorScale
+import com.ntikhoa.violapp.model.Scale.AllNoteScale
 import com.ntikhoa.violapp.model.Scale.Scale
 import com.ntikhoa.violapp.model.note.MapButtonNote
 
@@ -27,13 +27,15 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
 
     private lateinit var mapButtonNote: MapButtonNote
 
-    private val scale = CmajorScale()
+    private lateinit var currentScale: Scale
 
     private var noteBtnList = ArrayList<ArrayList<ImageButton>>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSampleSoundBinding.bind(view)
+
+        currentScale = AllNoteScale()
 
         mapButtonNote = MapButtonNote(
             binding.layoutGString,
@@ -44,7 +46,7 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
 
         preprocessData()
         setStringOnClick()
-        setOnScaleClick()
+        setOnBtnScaleClick()
     }
 
     private fun preprocessData() {
@@ -100,9 +102,9 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
         return false
     }
 
-    private fun setOnScaleClick() {
+    private fun setOnBtnScaleClick() {
         binding.btnScale.setOnClickListener {
-            val fragment = ChooseScaleFragment()
+            val fragment = ChooseScaleFragment.newInstance(currentScale)
             childFragmentManager.commit {
                 setCustomAnimations(0, 0, 0, R.anim.scrold_up)
                 replace(R.id.fragment_container_choose_scale, fragment)
@@ -118,6 +120,7 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
     }
 
     override fun onClick(scale: Scale) {
+        this.currentScale = scale
         for (i in noteBtnList.indices) {
             val strList = scale.getStrListByIndex(i)
             for (j in noteBtnList[i].indices) {

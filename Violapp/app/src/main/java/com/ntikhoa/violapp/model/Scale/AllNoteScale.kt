@@ -1,7 +1,11 @@
 package com.ntikhoa.violapp.model.Scale
 
-import com.ntikhoa.violapp.R
 
+import com.ntikhoa.violapp.R
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 class AllNoteScale : Scale() {
 
     override val name = "All notes"
