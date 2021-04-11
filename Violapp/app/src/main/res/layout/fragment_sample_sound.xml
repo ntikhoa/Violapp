@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:contentDescription="@string/note_images"
-                android:src="@drawable/str1_btn0"
+                android:src="@drawable/c_major_scale"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

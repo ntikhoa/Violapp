@@ -8,6 +8,8 @@ import com.ntikhoa.violapp.adapter.ScaleAdapter
 import com.ntikhoa.violapp.databinding.FragmentChooseScaleBinding
 import com.ntikhoa.violapp.model.Scale.AllNoteScale
 import com.ntikhoa.violapp.model.Scale.Scale
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 class ChooseScaleFragment : Fragment(R.layout.fragment_choose_scale),
@@ -19,6 +21,8 @@ class ChooseScaleFragment : Fragment(R.layout.fragment_choose_scale),
     private var currentScale: Scale = AllNoteScale()
 
     var onItemClickListener: OnItemClickListener? = null
+
+    private lateinit var adapter: ScaleAdapter
 
     companion object {
         private const val CURRENT_SCALE = "current scale"
@@ -43,14 +47,14 @@ class ChooseScaleFragment : Fragment(R.layout.fragment_choose_scale),
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentChooseScaleBinding.bind(view)
 
-        val adapter = ScaleAdapter(currentScale)
+        adapter = ScaleAdapter(currentScale)
         binding.recyclerViewScale.adapter = adapter
         adapter.onItemClickListener = this
     }
 
-    override fun onClick(scale: Scale) {
+    override fun onClick(scale: Scale, index: Int) {
         onItemClickListener?.let {
-            it.onClick(scale)
+            it.onClick(scale, index)
         }
     }
 
@@ -60,6 +64,6 @@ class ChooseScaleFragment : Fragment(R.layout.fragment_choose_scale),
     }
 
     interface OnItemClickListener {
-        fun onClick(scale: Scale)
+        fun onClick(scale: Scale, index: Int)
     }
 }

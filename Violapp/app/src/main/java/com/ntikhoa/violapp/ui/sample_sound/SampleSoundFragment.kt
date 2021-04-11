@@ -16,8 +16,10 @@ import com.ntikhoa.violapp.databinding.IncludeStringBinding
 import com.ntikhoa.violapp.model.Scale.AllNoteScale
 import com.ntikhoa.violapp.model.Scale.Scale
 import com.ntikhoa.violapp.model.note.MapButtonNote
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
     View.OnTouchListener,
     ChooseScaleFragment.OnItemClickListener {
@@ -31,11 +33,12 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
 
     private var noteBtnList = ArrayList<ArrayList<ImageButton>>()
 
+    @Inject
+    lateinit var sharedPref: SampleSoundSharedPref
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentSampleSoundBinding.bind(view)
-
-        currentScale = AllNoteScale()
 
         mapButtonNote = MapButtonNote(
             binding.layoutGString,
@@ -43,8 +46,11 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
             binding.layoutAString,
             binding.layoutEString
         )
-
         preprocessData()
+
+        currentScale = sharedPref.getScale()
+        setBtnNoteByScale(currentScale)
+
         setStringOnClick()
         setOnBtnScaleClick()
     }
@@ -119,8 +125,15 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
         _binding = null
     }
 
-    override fun onClick(scale: Scale) {
+    override fun onClick(scale: Scale, index: Int) {
         this.currentScale = scale
+        sharedPref.saveScale(index)
+        setBtnNoteByScale(scale)
+    }
+
+    private fun setBtnNoteByScale(scale: Scale) {
+        binding.textViewScale.text = scale.name
+
         for (i in noteBtnList.indices) {
             val strList = scale.getStrListByIndex(i)
             for (j in noteBtnList[i].indices) {

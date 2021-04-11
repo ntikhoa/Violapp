@@ -39,7 +39,7 @@ class ScaleAdapter(var currentScale: Scale) : RecyclerView.Adapter<ScaleAdapter.
                         val scale = scales[position]
                         currentScale = scale
                         notifyDataSetChanged()
-                        it.onClick(scale)
+                        it.onClick(scale, position)
                     }
                 }
             }
@@ -58,6 +58,6 @@ class ScaleAdapter(var currentScale: Scale) : RecyclerView.Adapter<ScaleAdapter.
     }
 
     interface OnItemClickListener {
-        fun onClick(scale: Scale)
+        fun onClick(scale: Scale, index: Int)
     }
 }
