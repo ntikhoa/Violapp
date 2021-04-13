@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
-    View.OnTouchListener,
-    ChooseScaleFragment.OnItemClickListener {
+    ChooseScaleFragment.OnItemClickListener,
+    OnHoldBtnNoteListener.OnHoldCallback {
 
     private var _binding: FragmentSampleSoundBinding? = null
     private val binding get() = _binding!!
@@ -32,6 +32,9 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
     private lateinit var currentScale: Scale
 
     private var noteBtnList = ArrayList<ArrayList<ImageButton>>()
+
+    @Inject
+    lateinit var onHoldBtnNoteListener: OnHoldBtnNoteListener
 
     @Inject
     lateinit var sharedPref: SampleSoundSharedPref
@@ -51,6 +54,7 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
         currentScale = sharedPref.getScale()
         setBtnNoteByScale(currentScale)
 
+        onHoldBtnNoteListener.onHoldCallback = this@SampleSoundFragment
         setStringOnClick()
         setOnBtnScaleClick()
     }
@@ -84,28 +88,10 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
             val str = noteBtnList[i]
             str.let {
                 for (j in str.indices) {
-                    str[j].setOnTouchListener(this@SampleSoundFragment)
+                    str[j].setOnTouchListener(onHoldBtnNoteListener)
                 }
             }
         }
-    }
-
-    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        val note = mapButtonNote.maps[v as ImageButton]
-        note?.let {
-            val mediaPlayer = note.getMediaPlayer(requireContext())
-            when (event?.actionMasked) {
-                ACTION_DOWN -> {
-                    binding.apply {
-                        imageNote.setImageResource(note.imagesResId)
-                        textViewNote.text = note.name
-                    }
-                    mediaPlayer.start()
-                }
-                ACTION_UP -> mediaPlayer.stop()
-            }
-        }
-        return false
     }
 
     private fun setOnBtnScaleClick() {
@@ -141,6 +127,26 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
                     noteBtnList[i][j].visibility = INVISIBLE
                 else noteBtnList[i][j].visibility = VISIBLE
             }
+        }
+    }
+
+    override fun onHold(v: View?) {
+        val note = mapButtonNote.maps[v as ImageButton]
+        note?.let {
+            val mediaPlayer = note.getMediaPlayer(requireContext())
+            binding.apply {
+                imageNote.setImageResource(note.imagesResId)
+                textViewNote.text = note.name
+            }
+            mediaPlayer.start()
+        }
+    }
+
+    override fun onRelease(v: View?) {
+        val note = mapButtonNote.maps[v as ImageButton]
+        note?.let {
+            val mediaPlayer = note.getMediaPlayer(requireContext())
+            mediaPlayer.stop()
         }
     }
 }
