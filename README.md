@@ -1,5 +1,5 @@
 # Violapp
-demo (90% features) link: https://youtu.be/QN7u3Phhe1Q
+demo link: https://youtu.be/QN7u3Phhe1Q
 # Introduction
 Violapp is an mobile application for musical instrument playera.
 It has two main features: metronome and violin sample sound.
@@ -17,6 +17,6 @@ Violin sample sound is for ear training exercise.
 * View Binding
 # Metronome
 ![](Preview/metronome.png)
-# Violin sample sound (developing)
+# Violin sample sound
 teaser image\
 ![](Preview/sample_sound.png)
