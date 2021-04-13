@@ -37,4 +37,7 @@
     <string name="first_position">First Position</string>
     <string name="note_images">note images</string>
     <string name="image_scale">image scale</string>
+    <string name="metronome">Metronome</string>
+    <string name="sample_sound">Sample Sound</string>
+    <string name="app_icon">app icon</string>
 </resources>

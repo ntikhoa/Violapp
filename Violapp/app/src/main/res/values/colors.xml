@@ -14,8 +14,10 @@
     <color name="color_primary_dark">#B7B7B7</color>
     <color name="gray">#6B6B6B</color>
     <color name="gray_transparent">#306B6B6B</color>
-    <color name="black_transparent">#90000000</color>
+    <color name="black_trans90">#90000000</color>
+    <color name="black_trans30">#30000000</color>
     <color name="teal">#03DAC5</color>
+    <color name="gold">#C9BC6D</color>
     <color name="red">#EF3229</color>
 
 </resources>

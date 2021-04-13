@@ -21,12 +21,12 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
         _binding = FragmentMenuBinding.bind(view)
         navController = Navigation.findNavController(view)
 
-        binding.button.setOnClickListener {
+        binding.btnMetronome.setOnClickListener {
             val action = MenuFragmentDirections.actionMenuFragmentToMetronomeFragment()
             navController.navigate(action)
         }
 
-        binding.button2.setOnClickListener {
+        binding.btnSampleSound.setOnClickListener {
             val action = MenuFragmentDirections.actionMenuFragmentToSampleSoundFragment()
             navController.navigate(action)
         }
