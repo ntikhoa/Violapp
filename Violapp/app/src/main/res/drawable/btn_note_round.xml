@@ -2,13 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape android:shape="oval">
-            <size android:width="@android:dimen/notification_large_icon_height" android:height="@android:dimen/notification_large_icon_height" />
+            <size android:width="@dimen/_45sdp" android:height="@dimen/_45sdp" />
             <solid android:color="@color/white_transparent" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape android:shape="oval">
-            <size android:width="@android:dimen/notification_large_icon_height" android:height="@android:dimen/notification_large_icon_height" />
+            <size android:width="@dimen/_45sdp" android:height="@dimen/_45sdp" />
             <solid android:color="@color/teal_transparent" />
         </shape>
     </item>

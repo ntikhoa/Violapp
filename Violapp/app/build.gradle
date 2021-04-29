@@ -65,4 +65,7 @@ dependencies {
     //hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    //scalable dimension unit
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
 }
