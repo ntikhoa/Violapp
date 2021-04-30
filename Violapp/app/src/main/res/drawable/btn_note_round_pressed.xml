@@ -3,8 +3,7 @@
     <item>
         <shape android:shape="oval">
             <size android:width="@dimen/dimen_btn_note" android:height="@dimen/dimen_btn_note" />
-            <solid android:color="@color/white_transparent" />
+            <solid android:color="@color/teal" />
         </shape>
     </item>
-
 </selector>

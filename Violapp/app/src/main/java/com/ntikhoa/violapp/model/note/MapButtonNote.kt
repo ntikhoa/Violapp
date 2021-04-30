@@ -12,7 +12,7 @@ open class MapButtonNote(
 ) {
 
     val maps = hashMapOf<ImageButton, Note>(
-        GstrBinding.btn0 to Note(R.drawable.str1_btn0, R.raw.str1_btn0, "G"),
+        GstrBinding.btn0 to Note(R.drawable.str1_btn0, R.raw.str1_btn0, "G", true),
         GstrBinding.btn1 to Note(R.drawable.str1_btn1, R.raw.str1_btn1, "G sharp"),
         GstrBinding.btn2 to Note(R.drawable.str1_btn2, R.raw.str1_btn2, "A"),
         GstrBinding.btn3 to Note(R.drawable.str1_btn3, R.raw.str1_btn3, "A sharp"),
@@ -21,7 +21,7 @@ open class MapButtonNote(
         GstrBinding.btn6 to Note(R.drawable.str1_btn6, R.raw.str1_btn6, "C sharp"),
         GstrBinding.btn7 to Note(R.drawable.str2_btn0, R.raw.str2_btn0, "D"),
 
-        DstrBinding.btn0 to Note(R.drawable.str2_btn0, R.raw.str2_btn0, "D"),
+        DstrBinding.btn0 to Note(R.drawable.str2_btn0, R.raw.str2_btn0, "D", true),
         DstrBinding.btn1 to Note(R.drawable.str2_btn1, R.raw.str2_btn1, "D sharp"),
         DstrBinding.btn2 to Note(R.drawable.str2_btn2, R.raw.str2_btn2, "E"),
         DstrBinding.btn3 to Note(R.drawable.str2_btn3, R.raw.str2_btn3, "F"),
@@ -30,7 +30,7 @@ open class MapButtonNote(
         DstrBinding.btn6 to Note(R.drawable.str2_btn6, R.raw.str2_btn6, "G sharp"),
         DstrBinding.btn7 to Note(R.drawable.str3_btn0, R.raw.str3_btn0, "A"),
 
-        AstrBinding.btn0 to Note(R.drawable.str3_btn0, R.raw.str3_btn0, "A"),
+        AstrBinding.btn0 to Note(R.drawable.str3_btn0, R.raw.str3_btn0, "A", true),
         AstrBinding.btn1 to Note(R.drawable.str3_btn1, R.raw.str3_btn1, "A sharp"),
         AstrBinding.btn2 to Note(R.drawable.str3_btn2, R.raw.str3_btn2, "B"),
         AstrBinding.btn3 to Note(R.drawable.str3_btn3, R.raw.str3_btn3, "C"),
@@ -39,7 +39,7 @@ open class MapButtonNote(
         AstrBinding.btn6 to Note(R.drawable.str3_btn6, R.raw.str3_btn6, "D sharp"),
         AstrBinding.btn7 to Note(R.drawable.str4_btn0, R.raw.str4_btn0, "E"),
 
-        EstrBinding.btn0 to Note(R.drawable.str4_btn0, R.raw.str4_btn0, "E"),
+        EstrBinding.btn0 to Note(R.drawable.str4_btn0, R.raw.str4_btn0, "E", true),
         EstrBinding.btn1 to Note(R.drawable.str4_btn1, R.raw.str4_btn1, "F"),
         EstrBinding.btn2 to Note(R.drawable.str4_btn2, R.raw.str4_btn2, "F sharp"),
         EstrBinding.btn3 to Note(R.drawable.str4_btn3, R.raw.str4_btn3, "G"),

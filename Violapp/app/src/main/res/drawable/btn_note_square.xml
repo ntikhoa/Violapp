@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="false">
+    <item>
         <shape android:shape="rectangle">
             <solid android:color="@color/white_transparent" />
-            <size android:width="@dimen/_45sdp" android:height="@dimen/_45sdp" />
-        </shape>
-    </item>
-    <item android:state_pressed="true">
-        <shape android:shape="rectangle">
-            <size android:width="@dimen/_45sdp" android:height="@dimen/_45sdp" />
-            <solid android:color="@color/teal_transparent" />
+            <size android:width="@dimen/dimen_btn_note" android:height="@dimen/dimen_btn_note" />
         </shape>
     </item>
 </selector>

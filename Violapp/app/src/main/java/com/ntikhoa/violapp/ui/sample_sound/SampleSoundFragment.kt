@@ -1,5 +1,6 @@
 package com.ntikhoa.violapp.ui.sample_sound
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.MotionEvent.ACTION_DOWN
@@ -7,7 +8,9 @@ import android.view.MotionEvent.ACTION_UP
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.ntikhoa.violapp.R
@@ -16,6 +19,8 @@ import com.ntikhoa.violapp.databinding.IncludeStringBinding
 import com.ntikhoa.violapp.model.Scale.AllNoteScale
 import com.ntikhoa.violapp.model.Scale.Scale
 import com.ntikhoa.violapp.model.note.MapButtonNote
+import com.ntikhoa.violapp.util.ViewUtil
+import com.ntikhoa.violapp.util.ViewUtil.setBackgroundDrawable
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -135,6 +140,9 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
         note?.let {
             val mediaPlayer = note.getMediaPlayer(requireContext())
             binding.apply {
+                if (note.isOpenStrNote)
+                    v.setBackgroundDrawable(R.drawable.btn_note_square_pressed)
+                else v.setBackgroundDrawable(R.drawable.btn_note_round_pressed)
                 imageNote.setImageResource(note.imagesResId)
                 textViewNote.text = note.name
             }
@@ -145,6 +153,9 @@ class SampleSoundFragment : Fragment(R.layout.fragment_sample_sound),
     override fun onRelease(v: View?) {
         val note = mapButtonNote.maps[v as ImageButton]
         note?.let {
+            if (note.isOpenStrNote)
+                v.setBackgroundDrawable(R.drawable.btn_note_square)
+            else v.setBackgroundDrawable(R.drawable.btn_note_round)
             val mediaPlayer = note.getMediaPlayer(requireContext())
             mediaPlayer.stop()
         }

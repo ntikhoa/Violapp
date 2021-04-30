@@ -4,7 +4,7 @@ import android.content.Context
 import android.media.MediaPlayer
 
 
-class Note(val imagesResId: Int, val soundResId: Int, val name: String) {
+class Note(val imagesResId: Int, val soundResId: Int, val name: String, val isOpenStrNote: Boolean = false) {
 
     private lateinit var mediaPlayer: MediaPlayer
 

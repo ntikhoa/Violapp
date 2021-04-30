@@ -28,6 +28,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
 
     @Inject
     lateinit var onHoldButtonListener: OnHoldButtonListener
+
     @Inject
     lateinit var sharedPref: MetronomeSharedPref
 
@@ -82,7 +83,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun setOnBtnMuteListener() {
-        binding.header.btnMute.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.header.btnMute.setOnCheckedChangeListener { _, isChecked ->
             if (tickFragment != null) {
                 tickFragment?.isMuted?.postValue(isChecked)
                 sharedPref.saveMuteState(isChecked)
@@ -175,7 +176,7 @@ class MetronomeFragment : Fragment(R.layout.fragment_metronome),
     }
 
     private fun setOnClickPlayButton() {
-        binding.controller.btnPlay.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.controller.btnPlay.setOnCheckedChangeListener { _, isChecked ->
             lockAndUnlockButton(!isChecked)
             if (tickFragment != null) {
                 tickFragment?.isPlayed?.postValue(isChecked)

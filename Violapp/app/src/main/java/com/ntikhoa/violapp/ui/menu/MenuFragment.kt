@@ -8,6 +8,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.ntikhoa.violapp.R
 import com.ntikhoa.violapp.databinding.FragmentMenuBinding
+import com.ntikhoa.violapp.util.ActivityUtil
 
 class MenuFragment : Fragment(R.layout.fragment_menu) {
 
@@ -18,6 +19,7 @@ class MenuFragment : Fragment(R.layout.fragment_menu) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ActivityUtil.setFullScreen(requireActivity())
         _binding = FragmentMenuBinding.bind(view)
         navController = Navigation.findNavController(view)
 
