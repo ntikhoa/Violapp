@@ -1,22 +1,16 @@
 # Violapp
 demo link: https://youtu.be/pf6AOCIXx8g
 # Introduction
-Violapp is an mobile application for musical instrument playera.
+Violapp is an mobile application for musical instrument players.
 It has two main features: metronome and violin sample sound.
-Metronome is for practicing rhythm.
-Violin sample sound is for ear training exercise.
-# Technique uses
-* Kotlin
-* Coroutines
-* MVVM model (architecture component, live data)
-* Hilt (dagger 2)
-* Navigation component
-* Shared Preference
+# Skills gain
 * Animation
 * Material Design
-* View Binding
+* Organize UI
+* Concurrency using Coroutines
+# Home
+![](Preview/home.png)
 # Metronome
 ![](Preview/metronome.png)
 # Violin sample sound
-teaser image\
 ![](Preview/sample_sound.png)
