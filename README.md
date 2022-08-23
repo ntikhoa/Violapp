@@ -8,9 +8,10 @@ It has two main features: metronome and violin sample sound.
 * Material Design
 * Organize UI
 * Concurrency using Coroutines
-# Home
+# Portfolio
+## Home
 ![](Preview/home.png)
-# Metronome
+## Metronome
 ![](Preview/metronome.png)
-# Violin sample sound
+## Violin sample sound
 ![](Preview/sample_sound.png)
